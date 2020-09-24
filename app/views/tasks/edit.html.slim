@@ -1,0 +1,6 @@
+h3.text-muted.font-weight-bold タスクの編集
+
+.navjustify-content-end
+  = link_to '一覧',tasks_path, class: 'nav-link'
+
+= render partial: 'form', locals: { task: @task }

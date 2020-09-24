@@ -1,0 +1,35 @@
+h3.text-muted.font-weight-bold 本日のタスク
+
+.container
+  canvas#analogclock
+    |  canvas not supprted
+
+p
+
+= link_to '新規登録',new_task_path, class: 'btn btn-primary'
+
+p
+
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Task.human_attribute_name(:name)
+      th= Task.human_attribute_name(:date)
+      th= Task.human_attribute_name(:start)
+      th= Task.human_attribute_name(:end)
+      th= Task.human_attribute_name(:user)
+      th= Task.human_attribute_name(:color)
+      th
+  tbody#table_body_id
+    - @tasks.each do |task|
+      tr
+        td= link_to task.name, task_path(task)
+        td= task.date
+        td= task.start.strftime("%I:%M%p")
+        td= task.end.strftime("%I:%M%p")
+        td= task.user.name
+        td style="color :#{task.user.color}" align="center"
+            |●
+        td
+          =link_to '編集', edit_task_path(task), class: 'btn btn-primary mr-3'
+          =link_to '削除', task, method: :delete, remote: true, data: { confirm: "タスク 「#{task.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger delete'
